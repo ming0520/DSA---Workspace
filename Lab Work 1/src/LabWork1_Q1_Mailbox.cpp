@@ -12,7 +12,7 @@ using namespace std;
 
 class Mailbox{
 private:
-	bool isOpen;
+	bool isOpen = false;
 
 public:
 	Mailbox(){
@@ -40,17 +40,43 @@ public:
 int main() {
 	Mailbox mailbox[TOTAL_MAILBOX];
 
-	for(int i = 1; i < 150; i+2){
-		switch(i%2){
-		case 0:
-			mailbox[i].close();
-			break;
-		default:
-			mailbox[i].open();
+	for(int i = 0; i < TOTAL_MAILBOX; i++){
+		mailbox[i].close();
+	}
+
+	for(int row = 0; row < 5 ; row++){
+		for(int col = 0; col < 30; col++){
+			int pos = (row*10)+col;
+				cout << mailbox[pos].getStatus() << " ";
+		}
+		cout << endl;
+	}
+	cout << endl << endl;
+
+	for(int i = 1; i < TOTAL_MAILBOX; i+=2){
+		mailbox[i].open();
+	}
+
+	for(int row = 0; row < 5 ; row++){
+			for(int col = 0; col < 30; col++){
+				int pos = (row*10)+col;
+					cout << mailbox[pos].getStatus() << " ";
+			}
+			cout << endl;
+	}
+	cout << endl << endl;
+
+	for(int i = 2; i < TOTAL_MAILBOX/2; i++){
+		for(int j = i; j < TOTAL_MAILBOX; j = i + j){
+			mailbox[i].flip();
 		}
 	}
 
-	for(int i = 0; i < TOTAL_MAILBOX; i+3){
-	}
-
+	for(int row = 0; row < 5 ; row++){
+			for(int col = 0; col < 30; col++){
+				int pos = (row*10)+col;
+					cout << mailbox[pos].getStatus() << " ";
+			}
+			cout << endl;
+		}
 }
