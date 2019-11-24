@@ -1,5 +1,5 @@
 //============================================================================
-// Name        : LabWork1_Q1.cpp
+// Name        : LabWork1_Q1_Mailbox.cpp
 // Author      : Zhong Ming Tan
 // Version     :
 // Copyright   : 
