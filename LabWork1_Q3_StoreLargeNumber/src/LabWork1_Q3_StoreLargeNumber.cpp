@@ -16,28 +16,54 @@ private:
 
 	int number[100];
 	int len;
+	int myTop;
+	int rowR;
+	int colR;
+	bool isOddDigit;
 	string input;
 
 public:
 
 	BigNumber(void){
 		this->len = 0;
+		this->myTop = 0;
+		this->rowR = 0;
+		this->colR = 3;
+		this->isOddDigit = false;
 	}
 
 	bool Empty(void){
 		return (len == 0);
 	}
 
+	void setLoop(){
+		if((this->len % 3) == 0){
+			this->rowR = this->len/3;
+			this->isOddDigit = false;
+		}
+		else{
+			this->rowR = (this->len/3) + 1;
+			this->isOddDigit = true;
+		}
+	}
+
 	void setNumber(string str){
 		this->input =  str;
 		this->len = this->input.length();
+		setLoop();
 		storeNumber();
 	}
 
-	void getNumber(void){
-		cin >> this->input;
-		this->len = this->input.length();
-		storeNumber();
+	int getBlock(int index){
+		if(index > myTop && index <= 0){
+			cout << "Invalid block! " <<endl;
+			return -1;
+		}
+		return this->number[index];
+	}
+
+	int getMyTop(void){
+		return this->myTop;
 	}
 
 	void storeNumber(void){
@@ -45,62 +71,42 @@ public:
 			cout << "There is no number!" <<endl;
 		}
 		else{
-			int n = 0;
-			int i = 0;
-			int j = 0;
-			int mul = 1;
+			int temp = 0, row = 0, col = 0, mul = 1;
 
 			reverse(this->input.begin(), this->input.end());
 
-			for(i = 0; i < this->len/3; i++){
+			for(row = 0; row < this->rowR; row++){
 				if(mul >= 100){
 					mul = 1;
-					n = 0;
+					temp = 0;
 				}
-				for(j = 0; j < 3; j++){
-					cout << (this->input[(i*3)+j] -'0') * mul<<endl;
-					n += ((this->input[(i*3)+j] -'0') * mul);
+				if(this->isOddDigit){
+					if((this->rowR - row) == 1){
+						this->colR = this->len % 3;
+					}
+				}
+				for(col = 0; col < this->colR; col++){
+					temp += ((this->input[(row*3)+col] -'0') * mul);
 					mul*=10;
-					this->number[i] = n;
+					this->number[row] = temp;
 				}
-			}
-
-			if((this->len % 3) == 0){
-				return;
-			}
-			else{
-				n = 0;
-				mul = 1;
-				cout << "Remainder: " << this->len%3 << endl;
-				for(j = 0; j < (this->len%3) ; j++){
-					n += ((this->input[(i*3)+j] -'0') * mul);
-					mul*=10;
-					this->number[i] = n;
-				}
+				this->myTop++;
 			}
 
 		}
 	}
 
 	void Display(void){
-		int n = 0;
-
-		if((this->len % 3) == 0){
-			n = this->len/3;
-		}
-		else{
-			n = (this->len/3) + 1;
-		}
 		cout << "Display: " << endl;
-		for(int i = 0; i < n; i++){
-			cout << this->number[i] << endl;
+		for(int row = 0; row < this->rowR; row++){
+			cout << "Block" << row << ": " << this->number[row] << endl;
 		}
 	}
 };
 
 int main() {
 	BigNumber bignumber1;
-	bignumber1.setNumber("12345");
+	bignumber1.setNumber("abc");
 	bignumber1.Display();
 	return 0;
 }
