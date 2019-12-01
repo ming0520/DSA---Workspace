@@ -7,15 +7,20 @@
 //============================================================================
 
 #include <iostream>
-#include "BigNumber.h"
+//#include "BigNumber.h"
+#include "AddBigNumber.h"
 using namespace std;
 
 int main() {
-	string str = "";
-	for(int i = 0; i < 100; i++){
-		str += "123";
-	}
-	BigNumber bignumber1(str);
-	bignumber1.Display();
+
+//	BigNumber bignumber1;
+//	bignumber1.setNumber("11111");
+//	cout << bignumber1.getMyTop() << endl;
+
+	string str1 = "9999999999";
+	string str2 = "1111111111";
+	AddBigNumber addbignumber(str1,str2);
+	BigNumber sum = addbignumber.getSum();
+	sum.Display();
 	return 0;
 }
