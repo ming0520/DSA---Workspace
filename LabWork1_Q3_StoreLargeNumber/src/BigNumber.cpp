@@ -6,32 +6,35 @@
  */
 
 #include "BigNumber.h"
-#include <iostream>
-#include<bits/stdc++.h>
-using namespace std;
 
 BigNumber::BigNumber(void){
 		this->len = 0;
-		this->myTop = 0;
+		this->myTop = -1;
 		this->rowR = 0;
 		this->colR = 3;
 		this->isOddDigit = false;
 		this->isDisplay = false;
+		for(int i = 0; i < CAPACITY; i++){
+			this->number[i] = 0;
+		}
 	}
 
 BigNumber::BigNumber(string str){
 			this->len = 0;
-			this->myTop = 0;
+			this->myTop = -1;
 			this->rowR = 0;
 			this->colR = 3;
 			this->isOddDigit = false;
 			this->isDisplay = false;
 			this->setNumber(str);
+			for(int i = 0; i < CAPACITY; i++){
+				this->number[i] = 0;
+			}
 		}
 
-	bool BigNumber::Empty(void){
-		return (len == 0);
-	}
+	bool BigNumber::Empty(void){return (len == 0);}
+
+	int BigNumber::getMyTop(void){return this->myTop;}
 
 	bool BigNumber::isDigit(){
 		int i = 0;
@@ -58,15 +61,16 @@ BigNumber::BigNumber(string str){
 	void BigNumber::setNumber(string str){
 		this->input =  str;
 		this->len = this->input.length();
-		if(this->len > 300){
+
+		if(this->len > CAPACITY * 3){
 			cout << "Please enter a number that less than 300 digit" <<endl;
 			return;
 		}
+
 		if(!isDigit()){
 			cout << "Invalid input! Please enter natural number" << endl;
 			return;
 		}
-		this->isDisplay = true;
 		setLoop();
 		storeNumber();
 	}
@@ -77,10 +81,6 @@ BigNumber::BigNumber(string str){
 			return -1;
 		}
 		return this->number[index];
-	}
-
-	int BigNumber::getMyTop(void){
-		return this->myTop;
 	}
 
 	void BigNumber::storeNumber(void){
@@ -109,7 +109,7 @@ BigNumber::BigNumber(string str){
 				}
 				this->myTop++;
 			}
-
+			this->isDisplay = true;
 		}
 	}
 
@@ -119,8 +119,24 @@ BigNumber::BigNumber(string str){
 			return;
 		}
 		cout << "Display: " << endl;
-		for(int row = 0; row < this->rowR; row++){
-			cout << "Block" << row << ": " << this->number[row] << endl;
+		for(int row = this->myTop; row >= 0; row--){
+			cout << this->number[row] << ",";
 		}
+		puts("");
+	}
+
+	void BigNumber::push(int number){
+		if(myTop == CAPACITY){
+			cout << "The block is full !" << endl;
+			return;
+		}
+		if(number/1000 != 0){
+			cout << "The number is too big! " << endl;
+			return;
+		}
+		myTop++;
+		this->number[myTop] = number;
+		this->isDisplay = true;
+
 	}
 
