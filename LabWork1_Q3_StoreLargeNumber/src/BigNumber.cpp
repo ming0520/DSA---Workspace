@@ -120,7 +120,13 @@ BigNumber::BigNumber(string str){
 		}
 		cout << "Display: " << endl;
 		for(int row = this->myTop; row >= 0; row--){
-			printf("%03i,",this->number[row]);
+			if( row == this->myTop)
+				printf("%i",this->number[row]);
+			else
+				printf("%03i",this->number[row]);
+			if(row > 0){
+				cout << ",";
+			}
 		}
 		puts("");
 	}
