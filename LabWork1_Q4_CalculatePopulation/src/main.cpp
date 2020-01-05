@@ -1,11 +1,3 @@
-//============================================================================
-// Name        : LabWork1_Q4_CalculatePopulation.cpp
-// Author      : Zhong Ming Tan
-// Version     :
-// Copyright   : 
-// Description : Hello World in C++, Ansi-style
-//============================================================================
-
 #include <iostream>
 #define URBAN 		0
 #define SUBURBAN 	1
@@ -36,13 +28,6 @@ int main() {
 			decadePopulation[0][i][j] = currentPopulation[i]*annualMigration[i][j];
 		}
 	}
-
-//	for(int i = 0; i < 3; i++){
-//			for(int j = 0; j < 3; j++){
-//				cout << decadePopulation[0][i][j] << " ";
-//			}
-//			puts("");
-//		}
 
 	for (int decade = 1; decade <= DECADE; decade++){
 		for(int row = 0; row < 3; row++){

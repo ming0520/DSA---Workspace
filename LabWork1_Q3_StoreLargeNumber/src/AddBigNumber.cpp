@@ -45,6 +45,12 @@ AddBigNumber::AddBigNumber(string num1, string num2) {
 
 		sum.push(temp);
 		temp = 0;
+
+		if(i == maxBlock - 1){
+			if(carry != 0){
+				sum.push(carry);
+			}
+		}
 	}
 }
 
