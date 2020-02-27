@@ -9,7 +9,7 @@
 #include <iostream>
 using namespace std;
 
-class LinkedQueue{
+class PQueue{
     class Node{
         public:
         int Data;
@@ -22,7 +22,7 @@ class LinkedQueue{
     };
     Node *myFront, *myBack;
     public:
-    LinkedQueue(){
+    PQueue(){
         myFront = myBack = 0;
     }
 
@@ -90,7 +90,7 @@ void br(){
 }
 
 int main (void){
-    LinkedQueue lq;
+	PQueue lq;
     lq.Display();
     br();
     cout << "Enqueue: " ;
