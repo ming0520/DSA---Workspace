@@ -90,13 +90,14 @@ void br(){
 }
 
 int main (void){
+	int arr[5] = {99,1,5,83,7};
 	PQueue lq;
     lq.Display();
     br();
     cout << "Enqueue: " ;
-    for(int i = 10; i > 5; i--){
-        cout << i << " ";
-        lq.Enqueue(i);
+    for(int i = 0; i < 5; i++){
+        cout << arr[i] << " ";
+        lq.Enqueue(arr[i]);
     }
     cout << endl;
 

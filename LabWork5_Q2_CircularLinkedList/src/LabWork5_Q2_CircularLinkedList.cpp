@@ -82,6 +82,29 @@ class LinkedQueue{
         }
     }
 
+    Node* search(int item){
+        Node *ptr = myFront;
+        bool found = false;
+
+        if(Empty())
+            cout<<"Empty List"<<endl;
+        else{
+     	   Node *ptr;
+     	   ptr = myFront;
+     	   do {
+               if(ptr->Data == item){
+                   found = true;
+                   return ptr;
+               }
+     	      ptr = ptr->Next;
+     	   } while(ptr != myFront);
+        }
+            if(!found)
+                return NULL;
+
+        return ptr;
+    }
+
 };
 
 int main (void){
@@ -93,7 +116,8 @@ int main (void){
     lq.Display();
     cout << "'3' successor is ";
     if(lq.nthSucessor(3) != -1){
-    	cout << lq.nthSucessor(3);
+    	cout << lq.nthSucessor(3) << endl;
     }
+    cout << "'3' address is " << lq.search(3) << endl;
     cout << endl;
 }
