@@ -89,6 +89,20 @@ void SJF(struct Process process[], int n){
     }
 }
 
+void FCFS(struct Process process[], int n){
+    int i, j;
+    for (i = 0; i <= n-1; i++){
+    	// Last i elements are already in place
+		for (j = 0; j <= n-i-1; j++){
+			if (process[j].priority > process[j+1].priority){
+				Process temp = process[j];
+				process[j] = process[j+1];
+				process[j+1] = temp;
+			}
+		}
+    }
+}
+
 void br(){
 	printf("==========================================================\n");
 }
@@ -110,6 +124,8 @@ int main() {
 	}
 
 
+	Clear(process,CAPACITY);
+	FCFS(process,CAPACITY);
 	avgWaitingTime = findAvgWaitingTime(process,CAPACITY);
 	avgTurnAroundTime = findAvgTurnAroundTime(process,CAPACITY);
 	printf("First Come First Serve\n");
